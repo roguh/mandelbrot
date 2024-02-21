@@ -17,7 +17,7 @@ def main():
         i = 0
         replace_chars = 0
         for char in mapcontents:
-            if char == args.replace:
+            if char in args.replace:
                 if replace_chars % args.step == 0 and i < len(source):
                     out.append(source[i])
                     i += 1
