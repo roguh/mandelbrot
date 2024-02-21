@@ -106,3 +106,5 @@ $ ./tile.py -s golf2_minified.c -m color_output.txt --step 4 --replace ' '
 ```
 
 ![Color output showing the Mandelbrot fractal and the source code interleaved into one image.](./color.png)
+
+![(bigger) Color output showing the Mandelbrot fractal and the source code interleaved into one image.](./img/color261.png)
