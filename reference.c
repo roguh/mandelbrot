@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 typedef float num;
-static const num BOUNDED_LIMIT = 4;
 
 num magnitude(num real, num imag) {
     return real * real + imag * imag;
@@ -22,7 +20,7 @@ void draw_to_terminal(size_t width, size_t height, const num* lattice_re, const 
         for (size_t x = 0; x < width; x++) {
             num r = lattice_re[x + y * width];
             num m = lattice_im[x + y * width];
-            if (magnitude(r, m) < BOUNDED_LIMIT) {
+            if (magnitude(r, m) < 2 * 2) {
                 printf("█");
             } else {
                 printf("▒");
@@ -49,7 +47,6 @@ int main(int argc, char* argv[]) {
     num* lattice_im = calloc(size, sizeof(num));
     num* c_re = calloc(size, sizeof(num));
     num* c_im = calloc(size, sizeof(num));
-    int animation = 0;
 
     num min_re = -2, max_re = 0.5, min_im = -1, max_im = 1;
     // y is imaginary, x is real
@@ -69,12 +66,6 @@ int main(int argc, char* argv[]) {
             num new_im = squared_im(lattice_re[i], lattice_im[i]) + c_im[i];
             lattice_re[i] = new_re;
             lattice_im[i] = new_im;
-        }
-        
-        if (iteration % 50 && animation) {
-            draw_to_terminal(width, height, lattice_re, lattice_im);
-            usleep(1000 * 100); // 100 milliseconds
-            if (max_iterations > 2) clear_terminal();
         }
         iteration++;
     }
